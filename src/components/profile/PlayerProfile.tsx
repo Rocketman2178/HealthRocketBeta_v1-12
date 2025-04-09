@@ -44,6 +44,13 @@ export function PlayerProfile({ isOpen, onClose }: PlayerProfileProps) {
     }
   };
 
+  const handleSignout = ()=>{
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(user));
+    }
+    signOut();
+  }
+
   if (!isOpen) return null;
 
   return (
@@ -54,7 +61,7 @@ export function PlayerProfile({ isOpen, onClose }: PlayerProfileProps) {
             <h2 className="text-xl font-bold text-white">Player Profile</h2>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => signOut()}
+                onClick={handleSignout}
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <LogOut size={18} />
